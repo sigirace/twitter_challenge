@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/authentication/signup_form_screen.dart';
 import 'package:twitter_challenge/authentication/widgets/auth_button.dart';
-import 'package:twitter_challenge/widgets/link_text.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
