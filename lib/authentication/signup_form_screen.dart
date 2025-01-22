@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/authentication/customize_screen.dart';
+import 'package:twitter_challenge/utils/date_utils.dart';
+import 'package:twitter_challenge/utils/validator.dart';
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
 import '../constants/sizes.dart';
@@ -40,35 +42,6 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
     _emailFocusNode.dispose();
     _birthdayFocusNode.dispose();
     super.dispose();
-  }
-
-  String _formatDate(DateTime date) {
-    return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-  }
-
-  String? _validateName(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Name cannot be empty";
-    }
-
-    if (value.length < 4) {
-      return "Name must be at least 4 characters";
-    }
-
-    return null;
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Email cannot be empty";
-    }
-
-    if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
-        .hasMatch(value)) {
-      return "Invalid email address";
-    }
-
-    return null;
   }
 
   bool _validate() {
@@ -184,9 +157,9 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                               color: Theme.of(context).primaryColor,
                               fontSize: FontSize.fs16,
                             ),
-                            validator: (value) => _validateName(value),
+                            validator: (value) => validateName(value),
                             onChanged: (value) => {
-                              _validateName(value) == null
+                              validateName(value) == null
                                   ? setState(
                                       () {
                                         _isNameValid = true;
@@ -225,9 +198,9 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                               color: Theme.of(context).primaryColor,
                               fontSize: FontSize.fs16,
                             ),
-                            validator: (value) => _validateEmail(value),
+                            validator: (value) => validateEmail(value),
                             onChanged: (value) => {
-                              _validateEmail(value) == null
+                              validateEmail(value) == null
                                   ? setState(
                                       () {
                                         _isEmailValid = true;
@@ -275,7 +248,8 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                               children: [
                                 Gaps.v5,
                                 const Text(
-                                    "This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else."),
+                                  "This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.",
+                                ),
                               ],
                             )
                         ],
@@ -337,7 +311,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                   onDateTimeChanged: (DateTime date) {
                     setState(() {
                       _selectedBirthday = date;
-                      _birthdayController.text = _formatDate(date);
+                      _birthdayController.text = formatDate(date);
                       _isBirthdayValid = true;
                     });
                   },
