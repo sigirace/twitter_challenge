@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/authentication/signup_screen.dart';
+import 'package:twitter_challenge/authentication/social_auth_screen.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
@@ -38,7 +38,9 @@ class SignupConfirmScreen extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const SignupScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => SocialAuthScreen(userData: userData),
+                  ),
                   (Route<dynamic> route) => false,
                 );
               },
