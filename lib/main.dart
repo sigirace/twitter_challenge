@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:twitter_challenge/authentication/password_screen.dart';
 import 'package:twitter_challenge/authentication/signup_screen.dart';
 import 'package:twitter_challenge/authentication/social_auth_screen.dart';
 
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
             primaryColor: const Color(0xFF4E98E9),
             useMaterial3: true,
           ),
-          home: SocialAuthScreen(userData: userData),
+          home: const PasswordScreen(),
         );
       },
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/authentication/password_screen.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
@@ -49,7 +50,13 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
 
   void _onNext() {
     if (_isAllFieldsFilled) {
-      print("go to next screen");
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const PasswordScreen(),
+        ),
+        (route) => false,
+      );
     }
   }
 
