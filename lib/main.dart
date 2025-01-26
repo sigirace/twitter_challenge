@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:twitter_challenge/authentication/password_screen.dart';
 import 'package:twitter_challenge/authentication/signup_screen.dart';
-import 'package:twitter_challenge/authentication/social_auth_screen.dart';
-import 'package:twitter_challenge/interests/twitter_experience_screen.dart';
 
 import 'constants/fontsize.dart';
 import 'constants/sizes.dart';
@@ -11,13 +8,6 @@ import 'constants/sizes.dart';
 void main() {
   runApp(const MyApp());
 }
-
-final Map<String, dynamic> userData = {
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "birthday": "1990-01-01",
-  "isTracking": true,
-};
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -73,7 +63,7 @@ class MyApp extends StatelessWidget {
             primaryColor: const Color(0xFF4E98E9),
             useMaterial3: true,
           ),
-          home: const TwitterExperienceScreen(),
+          home: const SignupScreen(),
         );
       },
     );

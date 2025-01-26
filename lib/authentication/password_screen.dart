@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/interests/twitter_experience_screen.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
@@ -46,7 +47,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   void _onNext() {
     if (_isPasswordValid()) {
-      print("Password is valid");
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const TwitterExperienceScreen()),
+        (route) => false,
+      );
     }
   }
 
@@ -137,7 +143,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       ),
                     ),
                   ),
-                  Gaps.v100,
                   Gaps.v100,
                   GestureDetector(
                     onTap: () => _onNext(),

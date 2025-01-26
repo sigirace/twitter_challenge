@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/interests/experience_screen.dart';
 import 'package:twitter_challenge/interests/widgets/twitter_exprience_widget.dart';
 
 import '../constants/fontsize.dart';
@@ -32,7 +33,12 @@ class _TwitterExperienceScreenState extends State<TwitterExperienceScreen> {
 
   void _onNext() {
     if (_selectedInterests.length >= 3) {
-      print("Next");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ExperienceScreen(),
+        ),
+      );
     }
   }
 

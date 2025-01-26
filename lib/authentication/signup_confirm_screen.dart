@@ -30,18 +30,18 @@ class SignupConfirmScreen extends StatelessWidget {
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           title: const Text("Congratulations!"),
-          content: const Text("You have successfully completed the signup."),
+          content: const Text(
+              "You have successfully completed the signup. You can now register your desired experiences after verifying your email."),
           actions: [
             CupertinoDialogAction(
               child: const Text("Confirm"),
               onPressed: () {
                 Navigator.of(context).pop();
-                Navigator.pushAndRemoveUntil(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => SocialAuthScreen(userData: userData),
                   ),
-                  (Route<dynamic> route) => false,
                 );
               },
             ),
