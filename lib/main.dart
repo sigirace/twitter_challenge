@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:twitter_challenge/authentication/signup_screen.dart';
+import 'package:twitter_challenge/main_navigation/main_navigation_screen.dart';
 
 import 'constants/fontsize.dart';
 import 'constants/sizes.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
             primaryColor: const Color(0xFF4E98E9),
             useMaterial3: true,
           ),
-          home: const SignupScreen(),
+          home: const MainNavigationScreen(),
         );
       },
     );
