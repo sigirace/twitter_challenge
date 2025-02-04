@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/constants/sizes.dart';
 import 'package:twitter_challenge/main_navigation/widgets/dynamic_image.dart';
 import 'package:twitter_challenge/main_navigation/widgets/dynamic_profile.dart';
+import 'package:twitter_challenge/main_navigation/widgets/profile.dart';
 import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';
 import '../../schemas.dart';
@@ -10,27 +11,16 @@ import '../../schemas.dart';
 class Post extends StatelessWidget {
   const Post({
     super.key,
-    required this.userImagePath,
-    required this.userName,
-    required this.postType,
-    this.imagePaths,
-    required this.postContent,
-    required this.replyCount,
-    required this.likeCount,
+    required this.postData,
   });
 
-  final String userImagePath;
-  final String userName;
-  final PostType postType;
-  final List<String>? imagePaths;
-  final String postContent;
-  final int replyCount;
-  final int likeCount;
+  final PostData postData;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Gaps.v10,
         IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,20 +30,11 @@ class Post extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        width: Sizes.size60,
-                        height: Sizes.size60,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(Sizes.size30),
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        child: Center(
-                          child: Image.asset(
-                            userImagePath,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                      Profile(
+                        userImagePath: postData.userImagePath,
+                        widthSize: Sizes.size60,
+                        heightSize: Sizes.size60,
+                        borderRadius: Sizes.size30,
                       ),
                       Positioned(
                         right: -2,
@@ -98,7 +79,7 @@ class Post extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          userName,
+                          postData.userName,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: FontSize.fs12,
@@ -124,11 +105,12 @@ class Post extends StatelessWidget {
                       ],
                     ),
                     Gaps.v5,
-                    Text(postContent),
+                    Text(postData.postContent),
                     Gaps.v5,
-                    if (postType == PostType.image && imagePaths != null)
+                    if (postData.postType == PostType.image &&
+                        postData.imagePaths != null)
                       DynamicImage(
-                        imagePaths: imagePaths!,
+                        imagePaths: postData.imagePaths!,
                       ),
                     Gaps.v10,
                     Row(
@@ -167,13 +149,25 @@ class Post extends StatelessWidget {
         Gaps.v5,
         Row(
           children: [
+            SizedBox(
+              width: Sizes.size60,
+              height: Sizes.size50,
+              child: DynamicProfile(
+                userImagePaths: postData.likeUserImagePaths,
+              ),
+            ),
             Gaps.h4,
-            Text('$replyCount replies'),
+            Text('${postData.replyCount} replies'),
             Gaps.h4,
             const Text('•'),
             Gaps.h4,
-            Text('$likeCount likes'),
+            Text('${postData.likeCount} likes'),
           ],
+        ),
+        Gaps.v5,
+        const Divider(
+          color: Colors.grey,
+          thickness: 1,
         ),
       ],
     );

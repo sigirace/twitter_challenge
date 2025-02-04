@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_challenge/main_navigation/widgets/profile.dart';
 
 import '../../constants/sizes.dart';
 
@@ -13,73 +14,83 @@ class DynamicProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return userImagePaths.length == 1
-        ? Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.red,
-              border: Border.all(color: Colors.grey),
-            ),
-            child: Image.asset(
-              userImagePaths[0],
+        ? Center(
+            child: Profile(
+              userImagePath: userImagePaths[0],
+              widthSize: Sizes.size30,
+              heightSize: Sizes.size30,
+              borderRadius: Sizes.size15,
             ),
           )
         : userImagePaths.length == 2
             ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey),
+                  Transform.translate(
+                    offset: const Offset(5, 0),
+                    child: Profile(
+                      userImagePath: userImagePaths[0],
+                      widthSize: Sizes.size28,
+                      heightSize: Sizes.size28,
+                      borderRadius: Sizes.size14,
                     ),
-                    child: Image.asset(userImagePaths[0], fit: BoxFit.cover),
                   ),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey),
+                  Transform.translate(
+                    offset: const Offset(-5, 0),
+                    child: Stack(
+                      alignment: Alignment.center, // 테두리와 이미지를 정렬
+                      children: [
+                        Container(
+                          width: Sizes.size26 + Sizes.size6,
+                          height: Sizes.size26 + Sizes.size6,
+                          decoration: BoxDecoration(
+                            color: Colors.white, // 테두리 색상
+                            borderRadius: BorderRadius.circular(
+                              Sizes.size13 + Sizes.size6,
+                            ),
+                          ),
+                        ),
+                        Profile(
+                          userImagePath: userImagePaths[1],
+                          widthSize: Sizes.size28,
+                          heightSize: Sizes.size28,
+                          borderRadius: Sizes.size14,
+                        ),
+                      ],
                     ),
-                    child: Image.asset(userImagePaths[1], fit: BoxFit.cover),
                   ),
                 ],
               )
-            : Row(
+            : Stack(
                 children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey),
+                  Positioned(
+                    left: 0,
+                    top: 10,
+                    child: Profile(
+                      userImagePath: userImagePaths[0],
+                      widthSize: Sizes.size28,
+                      heightSize: Sizes.size28,
+                      borderRadius: Sizes.size14,
                     ),
-                    child: Image.asset(userImagePaths[0], fit: BoxFit.cover),
                   ),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey),
+                  Positioned(
+                    right: 0,
+                    child: Profile(
+                      userImagePath: userImagePaths[1],
+                      widthSize: Sizes.size30,
+                      heightSize: Sizes.size30,
+                      borderRadius: Sizes.size15,
                     ),
-                    child: Image.asset(userImagePaths[1], fit: BoxFit.cover),
                   ),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey),
+                  Positioned(
+                    right: 14,
+                    bottom: 0,
+                    child: Profile(
+                      userImagePath: userImagePaths[2],
+                      widthSize: Sizes.size20,
+                      heightSize: Sizes.size20,
+                      borderRadius: Sizes.size10,
                     ),
-                    child: Image.asset(userImagePaths[2], fit: BoxFit.cover),
                   ),
                 ],
               );

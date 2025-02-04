@@ -66,6 +66,9 @@ flutter:
   assets:
     - assets/images/user/nomard.jpg
     - assets/images/user/lakers.jpg
+    - assets/images/user/barchart.jpg
+    - assets/images/user/no_user.jpg
+
     - assets/images/post/nomard_post_1.jpg
     - assets/images/post/nomard_post_2_1.jpg
     - assets/images/post/nomard_post_2_2.jpg
@@ -73,6 +76,14 @@ flutter:
     - assets/images/post/nomard_post_2_4.jpg
     - assets/images/post/barchart_post_1.jpg
     - assets/images/post/barchart_post_2.jpg
+    - assets/images/post/lakers_post_1.jpg
+    - assets/images/post/lakers_post_2_1.jpg
+    - assets/images/post/lakers_post_2_2.jpg
+    - assets/images/post/lakers_post_2_3.jpg
+    - assets/images/post/lakers_post_3_1.jpg
+    - assets/images/post/lakers_post_3_2.jpg
+    - assets/images/post/lakers_post_3_3.jpg
+    - assets/images/post/lakers_post_3_4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

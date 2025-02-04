@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:twitter_challenge/authentication/signup_screen.dart';
 import 'package:twitter_challenge/main_navigation/main_navigation_screen.dart';
 
 import 'constants/fontsize.dart';
