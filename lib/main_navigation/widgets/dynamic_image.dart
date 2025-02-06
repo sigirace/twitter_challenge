@@ -15,12 +15,16 @@ class DynamicImage extends StatelessWidget {
     final Completer<Size> completer = Completer();
 
     image.image.resolve(const ImageConfiguration()).addListener(
-      ImageStreamListener((ImageInfo info, bool _) {
-        completer.complete(Size(
-          info.image.width.toDouble(),
-          info.image.height.toDouble(),
-        ));
-      }),
+      ImageStreamListener(
+        (ImageInfo info, bool _) {
+          completer.complete(
+            Size(
+              info.image.width.toDouble(),
+              info.image.height.toDouble(),
+            ),
+          );
+        },
+      ),
     );
 
     return completer.future;
@@ -61,7 +65,8 @@ class DynamicImage extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(
-                          Sizes.size12), // 🔹 borderRadius 적용
+                        Sizes.size12,
+                      ),
                       child: Image.asset(
                         entry.value,
                         width: imageWidth,
