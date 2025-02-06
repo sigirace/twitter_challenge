@@ -4,6 +4,7 @@ const String baseImagePath = 'assets/images/user/';
 
 final List<PostData> postData = [
   PostData(
+    postId: '1',
     userImagePath: '$baseImagePath/nomard.jpg',
     userName: 'Nomard Coder',
     postContent:
@@ -24,6 +25,7 @@ final List<PostData> postData = [
     postType: PostType.image,
   ),
   PostData(
+    postId: '2',
     userImagePath: '$baseImagePath/barchart.jpg',
     userName: 'barchart',
     postContent:
@@ -34,6 +36,7 @@ final List<PostData> postData = [
     postType: PostType.text,
   ),
   PostData(
+    postId: '3',
     userImagePath: '$baseImagePath/lakers.jpg',
     userName: 'lakers',
     postContent: 'OFFICIAL: Welcome to the squad, Maxi!',
@@ -49,6 +52,7 @@ final List<PostData> postData = [
     postType: PostType.image,
   ),
   PostData(
+    postId: '4',
     userImagePath: '$baseImagePath/barchart.jpg',
     userName: 'barchart',
     postContent:
@@ -64,6 +68,7 @@ final List<PostData> postData = [
     postType: PostType.image,
   ),
   PostData(
+    postId: '5',
     userImagePath: '$baseImagePath/lakers.jpg',
     userName: 'lakers',
     postContent: 'Primetime',
@@ -83,6 +88,7 @@ final List<PostData> postData = [
     postType: PostType.image,
   ),
   PostData(
+    postId: '6',
     userImagePath: '$baseImagePath/nomard.jpg',
     userName: 'Nomard Coder',
     postContent: '따습한 성탄절 되세요 🥰\n메리 크리스마스 💖',
@@ -99,6 +105,7 @@ final List<PostData> postData = [
     postType: PostType.image,
   ),
   PostData(
+    postId: '7',
     userImagePath: '$baseImagePath/barchart.jpg',
     userName: 'barchart',
     postContent:
@@ -115,6 +122,7 @@ final List<PostData> postData = [
     postType: PostType.image,
   ),
   PostData(
+    postId: '8',
     userImagePath: '$baseImagePath/lakers.jpg',
     userName: 'lakers',
     postContent: 'Can`t spell Luka without LA',

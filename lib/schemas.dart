@@ -5,6 +5,7 @@ enum PostType {
 }
 
 class PostData {
+  final String postId;
   final String userImagePath;
   final String userName;
   final String postContent;
@@ -15,6 +16,7 @@ class PostData {
   final PostType postType;
 
   PostData({
+    required this.postId,
     required this.userImagePath,
     required this.userName,
     required this.postContent,

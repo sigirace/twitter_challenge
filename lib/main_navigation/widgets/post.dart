@@ -12,9 +12,11 @@ class Post extends StatelessWidget {
   const Post({
     super.key,
     required this.postData,
+    required this.onEllipsisTap,
   });
 
   final PostData postData;
+  final VoidCallback onEllipsisTap;
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +98,12 @@ class Post extends StatelessWidget {
                               ),
                             ),
                             Gaps.h10,
-                            FaIcon(
-                              FontAwesomeIcons.ellipsis,
-                              size: FontSize.fs12,
+                            GestureDetector(
+                              onTap: onEllipsisTap,
+                              child: FaIcon(
+                                FontAwesomeIcons.ellipsis,
+                                size: FontSize.fs12,
+                              ),
                             ),
                           ],
                         ),
