@@ -16,6 +16,7 @@ class _EllipsisTabState extends State<EllipsisTab> {
   void _onReportTap() {
     Navigator.pop(context);
     showModalBottomSheet(
+      showDragHandle: true,
       isScrollControlled: true,
       context: context,
       builder: (context) => const Report(),
@@ -43,7 +44,7 @@ class _EllipsisTabState extends State<EllipsisTab> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(Sizes.size20),
             ),
             child: Column(
@@ -72,8 +73,8 @@ class _EllipsisTabState extends State<EllipsisTab> {
                     ],
                   ),
                 ),
-                const Divider(
-                  color: Colors.grey,
+                Divider(
+                  color: Colors.grey.shade300,
                 ),
                 GestureDetector(
                   onTap: () {},
@@ -104,7 +105,7 @@ class _EllipsisTabState extends State<EllipsisTab> {
           Gaps.v10,
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(Sizes.size20),
             ),
             child: Column(
@@ -133,8 +134,8 @@ class _EllipsisTabState extends State<EllipsisTab> {
                     ],
                   ),
                 ),
-                const Divider(
-                  color: Colors.grey,
+                Divider(
+                  color: Colors.grey.shade300,
                 ),
                 GestureDetector(
                   onTap: _onReportTap,

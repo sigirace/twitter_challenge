@@ -27,29 +27,24 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Sizes.size10,
-      ),
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            title: FaIcon(
-              FontAwesomeIcons.at,
-              size: FontSize.fs30,
-            ),
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          title: FaIcon(
+            FontAwesomeIcons.at,
+            size: FontSize.fs30,
           ),
-          SliverList.builder(
-            itemCount: postData.length,
-            itemBuilder: (context, index) => Post(
-              key: Key(postData[index].postId),
-              postData: postData[index],
-              onEllipsisTap: () => _onEllipsisTap(postData[index].postId),
-            ),
+        ),
+        SliverList.builder(
+          itemCount: postData.length,
+          itemBuilder: (context, index) => Post(
+            key: Key(postData[index].postId),
+            postData: postData[index],
+            onEllipsisTap: () => _onEllipsisTap(postData[index].postId),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

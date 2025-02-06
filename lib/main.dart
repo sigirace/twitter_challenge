@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
+            bottomSheetTheme: const BottomSheetThemeData(
+              backgroundColor: Colors.white,
+            ),
             bottomAppBarTheme: const BottomAppBarTheme(
               elevation: 0,
               color: Colors.white,
