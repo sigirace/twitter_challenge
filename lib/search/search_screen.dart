@@ -13,33 +13,36 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        toolbarHeight: Height.h100,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Search',
-              style: TextStyle(
-                fontSize: FontSize.fs28,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          toolbarHeight: Height.h100,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Search',
+                style: TextStyle(
+                  fontSize: FontSize.fs28,
+                ),
               ),
-            ),
-            Gaps.v10,
-            const CupertinoSearchTextField(
-              placeholder: 'Search',
-              autocorrect: false,
-            ),
-          ],
+              Gaps.v10,
+              const CupertinoSearchTextField(
+                placeholder: 'Search',
+                autocorrect: false,
+              ),
+            ],
+          ),
         ),
-      ),
-      body: ListView.separated(
-        itemCount: userSearchData.length,
-        itemBuilder: (context, index) => SearchUser(
-          userSearchData: userSearchData[index],
+        body: ListView.separated(
+          itemCount: userSearchData.length,
+          itemBuilder: (context, index) => SearchUser(
+            userSearchData: userSearchData[index],
+          ),
+          separatorBuilder: (context, index) => const CustomDivider(),
         ),
-        separatorBuilder: (context, index) => const CustomDivider(),
       ),
     );
   }
