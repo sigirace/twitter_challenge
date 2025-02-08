@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/search/widgets/search_user.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
 import '../constants/sizes.dart';
 import '../data/search_data.dart';
+import '../widgets/custom_divider.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -39,20 +39,7 @@ class SearchScreen extends StatelessWidget {
         itemBuilder: (context, index) => SearchUser(
           userSearchData: userSearchData[index],
         ),
-        separatorBuilder: (context, index) => Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Container(
-              width: Width.w100 + Width.w100 + Width.w100,
-              height: Height.h1 / 5,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade500,
-              ),
-            ),
-            Gaps.v5,
-          ],
-        ),
+        separatorBuilder: (context, index) => const CustomDivider(),
       ),
     );
   }
