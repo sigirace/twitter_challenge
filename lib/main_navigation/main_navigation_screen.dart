@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/activity/activity_screen.dart';
 import 'package:twitter_challenge/main_navigation/main_screen.dart';
 import 'package:twitter_challenge/main_navigation/not_imple.dart';
 import 'package:twitter_challenge/main_navigation/post_screen.dart';
@@ -70,7 +71,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 3,
-            child: const NotImplementedScreen(),
+            child: const ActivityScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 4,
