@@ -4,7 +4,6 @@ import 'package:twitter_challenge/main_navigation/widgets/ellipsis_tab.dart';
 import 'package:twitter_challenge/main_navigation/widgets/post.dart';
 
 import '../constants/fontsize.dart';
-import '../constants/sizes.dart';
 import '../data/post_data.dart';
 
 class MainScreen extends StatefulWidget {

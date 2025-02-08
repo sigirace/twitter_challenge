@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/widgets/follwoing.dart';
 
 import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';
@@ -58,36 +59,7 @@ class SearchUser extends StatelessWidget {
           ),
         ],
       ),
-      trailing: Container(
-        width: Sizes.size80,
-        height: Sizes.size35,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(Sizes.size10)),
-          border: Border.all(
-            color:
-                userSearchData.isFollowing ? Colors.blue : Colors.grey.shade500,
-          ),
-          color: userSearchData.isFollowing ? Colors.blue : Colors.white,
-        ),
-        child: userSearchData.isFollowing
-            ? Text(
-                "Following",
-                style: TextStyle(
-                  fontSize: FontSize.fs12,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
-            : Text(
-                "Follow",
-                style: TextStyle(
-                  fontSize: FontSize.fs12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-      ),
+      trailing: FollowingWidget(isFollowing: userSearchData.isFollowing),
       isThreeLine: true,
     );
   }
