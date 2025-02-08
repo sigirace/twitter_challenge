@@ -4,6 +4,7 @@ import 'package:twitter_challenge/main_navigation/main_screen.dart';
 import 'package:twitter_challenge/main_navigation/not_imple.dart';
 import 'package:twitter_challenge/main_navigation/post_screen.dart';
 import 'package:twitter_challenge/main_navigation/widgets/nav_tab.dart';
+import 'package:twitter_challenge/search/search_screen.dart';
 
 import '../constants/sizes.dart';
 
@@ -65,7 +66,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: const NotImplementedScreen(),
+            child: const SearchScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 3,

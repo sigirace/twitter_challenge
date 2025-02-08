@@ -1,4 +1,4 @@
-import '../schemas.dart';
+import '../schemas/post_schema.dart';
 
 const String baseImagePath = 'assets/images/user/';
 

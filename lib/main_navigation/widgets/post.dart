@@ -6,7 +6,7 @@ import 'package:twitter_challenge/main_navigation/widgets/dynamic_profile.dart';
 import 'package:twitter_challenge/main_navigation/widgets/profile.dart';
 import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';
-import '../../schemas.dart';
+import '../../schemas/post_schema.dart';
 
 class Post extends StatelessWidget {
   const Post({
