@@ -19,3 +19,23 @@ class UserSearchData {
     required this.isOnline,
   });
 }
+
+class UserProfileData {
+  final int userId;
+  final String userImagePath;
+  final String userName;
+  final String fullName;
+  final String message;
+  final int followerCount;
+  final List<String>? followerImagePaths;
+
+  UserProfileData({
+    required this.userId,
+    required this.userImagePath,
+    required this.userName,
+    required this.fullName,
+    required this.message,
+    required this.followerCount,
+    this.followerImagePaths,
+  });
+}

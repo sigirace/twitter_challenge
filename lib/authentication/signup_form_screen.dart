@@ -169,7 +169,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                                       () {
                                         _isNameValid = false;
                                       },
-                                    )
+                                    ),
                             },
                             onTap: () => _onTap(_nameFocusNode),
                             onSaved: (value) => userData["name"] = value!,
@@ -210,7 +210,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                                       () {
                                         _isEmailValid = false;
                                       },
-                                    )
+                                    ),
                             },
                             onTap: () => _onTap(_emailFocusNode),
                             onSaved: (value) => userData["email"] = value!,
@@ -251,7 +251,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                                   "This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.",
                                 ),
                               ],
-                            )
+                            ),
                         ],
                       ),
                     ),

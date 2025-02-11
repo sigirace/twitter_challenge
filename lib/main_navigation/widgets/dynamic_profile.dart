@@ -7,9 +7,13 @@ class DynamicProfile extends StatelessWidget {
   const DynamicProfile({
     super.key,
     required this.userImagePaths,
+    this.leftOffset,
+    this.rightOffset,
   });
 
   final List<String> userImagePaths;
+  final double? leftOffset;
+  final double? rightOffset;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class DynamicProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Transform.translate(
-                    offset: const Offset(5, 0),
+                    offset: Offset(leftOffset ?? 5, 0),
                     child: Profile(
                       userImagePath: userImagePaths[0],
                       widthSize: Sizes.size28,
@@ -36,7 +40,7 @@ class DynamicProfile extends StatelessWidget {
                     ),
                   ),
                   Transform.translate(
-                    offset: const Offset(-5, 0),
+                    offset: Offset(rightOffset ?? -5, 0),
                     child: Stack(
                       alignment: Alignment.center, // 테두리와 이미지를 정렬
                       children: [

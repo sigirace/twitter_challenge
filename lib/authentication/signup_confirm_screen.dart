@@ -31,7 +31,7 @@ class SignupConfirmScreen extends StatelessWidget {
         return CupertinoAlertDialog(
           title: const Text("Congratulations!"),
           content: const Text(
-              "You have successfully completed the signup. You can now register your desired experiences after verifying your email."),
+              "You have successfully completed the signup. You can now register your desired experiences after verifying your email.",),
           actions: [
             CupertinoDialogAction(
               child: const Text("Confirm"),
@@ -114,7 +114,7 @@ class SignupConfirmScreen extends StatelessWidget {
                                     color: Colors.green,
                                   ),
                                 ],
-                              )),
+                              ),),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: FontSize.fs16,
@@ -136,7 +136,7 @@ class SignupConfirmScreen extends StatelessWidget {
                                     color: Colors.green,
                                   ),
                                 ],
-                              )),
+                              ),),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: FontSize.fs16,
@@ -157,7 +157,7 @@ class SignupConfirmScreen extends StatelessWidget {
                                     color: Colors.green,
                                   ),
                                 ],
-                              )),
+                              ),),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: FontSize.fs16,

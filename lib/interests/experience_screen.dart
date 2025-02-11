@@ -197,7 +197,7 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
         bottomNavigationBar: BottomAppBar(

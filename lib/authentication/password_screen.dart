@@ -50,7 +50,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) => const TwitterExperienceScreen()),
+            builder: (context) => const TwitterExperienceScreen(),),
         (route) => false,
       );
     }
