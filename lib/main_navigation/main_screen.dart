@@ -30,9 +30,11 @@ class _MainScreenState extends State<MainScreen> {
       slivers: [
         SliverAppBar(
           floating: true,
-          title: FaIcon(
-            FontAwesomeIcons.at,
-            size: FontSize.fs30,
+          title: Center(
+            child: FaIcon(
+              FontAwesomeIcons.at,
+              size: FontSize.fs30,
+            ),
           ),
         ),
         SliverList.builder(

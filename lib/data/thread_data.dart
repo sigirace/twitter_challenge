@@ -15,7 +15,7 @@ final UserProfileData userProfileData = UserProfileData(
   ],
 );
 
-const String baseImagePath = 'assets/images/user/';
+const String baseImagePath = 'assets/images/user';
 final List<PostData> threadData = [
   PostData(
     postId: '1',

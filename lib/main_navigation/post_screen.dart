@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/media/Image_picker_screen.dart';
+import 'package:twitter_challenge/media/widgets/post_image.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
@@ -16,6 +18,7 @@ class _PostScreenState extends State<PostScreen> {
   final FocusNode _focusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
+  String? _selectedImagePath;
 
   @override
   void initState() {
@@ -36,12 +39,32 @@ class _PostScreenState extends State<PostScreen> {
     });
   }
 
+  Future<void> _onMediaPost() async {
+    final result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ImagePickerScreen(),
+        fullscreenDialog: true,
+      ),
+    );
+
+    if (result != null && result is String) {
+      _selectedImagePath = result;
+      setState(() {});
+    }
+  }
+
   @override
   void dispose() {
     _focusNode.dispose();
     _textController.dispose();
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _removeImage() {
+    setState(() {
+      _selectedImagePath = null;
+    });
   }
 
   @override
@@ -143,11 +166,20 @@ class _PostScreenState extends State<PostScreen> {
                                   focusedBorder: InputBorder.none,
                                 ),
                               ),
+                              if (_selectedImagePath != null)
+                                PostImage(
+                                  imagePath: _selectedImagePath!,
+                                  callback: _removeImage,
+                                ),
                               Gaps.v10,
-                              const FaIcon(
-                                FontAwesomeIcons.paperclip,
-                                size: Sizes.size20,
-                                color: Colors.grey,
+                              Gaps.v10,
+                              GestureDetector(
+                                onTap: _onMediaPost,
+                                child: const FaIcon(
+                                  FontAwesomeIcons.paperclip,
+                                  size: Sizes.size20,
+                                  color: Colors.grey,
+                                ),
                               ),
                               Gaps.v30,
                             ],
