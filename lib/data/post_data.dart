@@ -1,6 +1,6 @@
 import '../schemas/post_schema.dart';
 
-const String baseImagePath = 'assets/images/user/';
+const String baseImagePath = 'assets/images/user';
 
 final List<PostData> postData = [
   PostData(
