@@ -5,6 +5,7 @@ import 'package:twitter_challenge/main_navigation/widgets/dynamic_profile.dart';
 import 'package:twitter_challenge/main_navigation/widgets/post.dart';
 import 'package:twitter_challenge/settings/setting_screen.dart';
 import 'package:twitter_challenge/users/widgets/persistent_tab_bar.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 
 import '../constants/gaps.dart';
 import '../constants/sizes.dart';
@@ -70,9 +71,12 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               Text(
                                 userProfileData.userName,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: Sizes.size32,
                                   fontWeight: FontWeight.bold,
+                                  color: isDarkMode(context)
+                                      ? Colors.grey.shade400
+                                      : Colors.black,
                                 ),
                               ),
                               Gaps.v8,
@@ -80,9 +84,11 @@ class ProfileScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     userProfileData.fullName,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: Sizes.size20,
-                                      color: Colors.black,
+                                      color: isDarkMode(context)
+                                          ? Colors.grey.shade400
+                                          : Colors.black,
                                     ),
                                   ),
                                   Gaps.h8,
@@ -109,9 +115,11 @@ class ProfileScreen extends StatelessWidget {
                               Gaps.v8,
                               Text(
                                 userProfileData.message,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: Sizes.size16,
-                                  color: Colors.black,
+                                  color: isDarkMode(context)
+                                      ? Colors.grey.shade400
+                                      : Colors.black,
                                 ),
                               ),
                               Gaps.v12,
@@ -128,7 +136,9 @@ class ProfileScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: Sizes.size14,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.grey.shade700,
+                                      color: isDarkMode(context)
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade700,
                                     ),
                                   ),
                                 ],

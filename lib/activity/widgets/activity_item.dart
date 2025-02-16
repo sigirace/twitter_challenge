@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_challenge/activity/widgets/activity_profile.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 import 'package:twitter_challenge/widgets/follwoing.dart';
 
 import '../../constants/fontsize.dart';
@@ -24,7 +25,8 @@ class ActivityItemWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: FontSize.fs12,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color:
+                    isDarkMode(context) ? Colors.grey.shade400 : Colors.black,
               ),
             ),
             TextSpan(
@@ -48,8 +50,9 @@ class ActivityItemWidget extends StatelessWidget {
           if (activity.additionalInfo != null)
             Text(
               activity.additionalInfo!,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color:
+                    isDarkMode(context) ? Colors.grey.shade400 : Colors.black,
               ),
             ),
         ],

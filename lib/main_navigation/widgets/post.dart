@@ -25,7 +25,7 @@ class Post extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: Sizes.size10,
       ),
-      color: Colors.white,
+      color: Theme.of(context).appBarTheme.backgroundColor,
       child: Column(
         children: [
           Gaps.v10,

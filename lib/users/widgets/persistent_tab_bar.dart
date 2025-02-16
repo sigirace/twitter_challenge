@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 
 import '../../constants/sizes.dart';
 
@@ -11,22 +12,25 @@ class PersistentTabBar extends SliverPersistentHeaderDelegate {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isDarkMode(context) ? Colors.grey.shade900 : Colors.white,
         border: Border.symmetric(
           horizontal: BorderSide(
-            color: Colors.grey.shade200,
+            color: isDarkMode(context)
+                ? Colors.grey.shade400
+                : Colors.grey.shade200,
             width: 0.5,
           ),
         ),
       ),
-      child: const TabBar(
+      child: TabBar(
         indicatorSize: TabBarIndicatorSize.tab,
-        indicatorColor: Colors.black,
-        labelPadding: EdgeInsets.symmetric(
+        indicatorColor:
+            isDarkMode(context) ? Colors.grey.shade400 : Colors.black,
+        labelPadding: const EdgeInsets.symmetric(
           vertical: Sizes.size10,
         ),
-        labelColor: Colors.black,
-        tabs: [
+        labelColor: isDarkMode(context) ? Colors.grey.shade400 : Colors.black,
+        tabs: const [
           Tab(text: 'Threads'),
           Tab(text: 'Replies'),
         ],

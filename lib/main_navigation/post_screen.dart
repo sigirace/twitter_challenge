@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
@@ -51,7 +52,6 @@ class _PostScreenState extends State<PostScreen> {
       height: size.height * 0.8,
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(Sizes.size20),
           topRight: Radius.circular(Sizes.size20),

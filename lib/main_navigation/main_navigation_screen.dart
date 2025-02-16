@@ -6,6 +6,7 @@ import 'package:twitter_challenge/main_navigation/post_screen.dart';
 import 'package:twitter_challenge/main_navigation/widgets/nav_tab.dart';
 import 'package:twitter_challenge/users/profile_screen.dart';
 import 'package:twitter_challenge/search/search_screen.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 
 import '../constants/sizes.dart';
 
@@ -43,9 +44,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(isDarkMode(context));
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: _isPostScreenOpen ? Colors.black : Colors.white,
+      backgroundColor: _isPostScreenOpen
+          ? isDarkMode(context)
+              ? Colors.grey.shade400
+              : Colors.black
+          : Theme.of(context).appBarTheme.backgroundColor,
       body: Stack(
         children: [
           Offstage(
@@ -56,9 +62,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 child: Container(
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      Sizes.size40,
-                    ),
+                    borderRadius: _isPostScreenOpen
+                        ? BorderRadius.circular(
+                            Sizes.size40,
+                          )
+                        : null,
                   ),
                   child: const MainScreen(),
                 ),
@@ -80,7 +88,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
