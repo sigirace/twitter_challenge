@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_challenge/activity/widgets/activity.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/sizes.dart';
@@ -68,13 +69,19 @@ class _ActivityScreenState extends State<ActivityScreen>
                 decoration: tabController.index == activityTabs.indexOf(tab)
                     ? BoxDecoration(
                         borderRadius: BorderRadius.circular(Sizes.size8),
-                        color: Colors.black,
+                        color: isDarkMode(context)
+                            ? Colors.grey.shade400
+                            : Colors.black,
                       )
                     : BoxDecoration(
                         borderRadius: BorderRadius.circular(Sizes.size8),
-                        color: Colors.white,
+                        color: isDarkMode(context)
+                            ? Colors.grey.shade900
+                            : Colors.white,
                         border: Border.all(
-                          color: Colors.grey,
+                          color: isDarkMode(context)
+                              ? Colors.grey.shade900
+                              : Colors.grey.shade400,
                           width: 1,
                         ),
                       ),
@@ -83,8 +90,12 @@ class _ActivityScreenState extends State<ActivityScreen>
                     tab,
                     style: TextStyle(
                       color: tabController.index == activityTabs.indexOf(tab)
-                          ? Colors.white
-                          : Colors.black,
+                          ? isDarkMode(context)
+                              ? Colors.black
+                              : Colors.white
+                          : isDarkMode(context)
+                              ? Colors.grey.shade400
+                              : Colors.black,
                     ),
                   ),
                 ),

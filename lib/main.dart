@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: 'Twitter Challenge',
+          themeMode: ThemeMode.system,
           theme: ThemeData(
+            brightness: Brightness.light,
             scaffoldBackgroundColor: Colors.white,
             appBarTheme: const AppBarTheme(
               surfaceTintColor: Colors.white,
@@ -39,6 +41,53 @@ class MyApp extends StatelessWidget {
             bottomAppBarTheme: const BottomAppBarTheme(
               elevation: 0,
               color: Colors.white,
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              labelStyle: TextStyle(
+                color: Colors.black54,
+                fontSize: FontSize.fs16,
+              ),
+              floatingLabelStyle: TextStyle(
+                color: Colors.black,
+                fontSize: FontSize.fs20,
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.shade400,
+                ),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.shade400,
+                ),
+              ),
+            ),
+            textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: Color(0xFF4E98E9),
+            ),
+            primaryColor: const Color(0xFF4E98E9),
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: Colors.black,
+            appBarTheme: AppBarTheme(
+              surfaceTintColor: Colors.black,
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.grey.shade400,
+              elevation: 0,
+              titleTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Sizes.size20,
+                color: Colors.grey.shade400,
+              ),
+            ),
+            bottomSheetTheme: const BottomSheetThemeData(
+              backgroundColor: Colors.black,
+            ),
+            bottomAppBarTheme: const BottomAppBarTheme(
+              elevation: 0,
+              color: Colors.black,
             ),
             inputDecorationTheme: InputDecorationTheme(
               labelStyle: TextStyle(

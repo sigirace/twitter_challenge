@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/utils/mode.dart';
 
 import '../constants/fontsize.dart';
 import '../constants/gaps.dart';
@@ -57,8 +58,10 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             ),
             title: const Text('Private profile'),
             trailing: Switch(
-              activeColor: Colors.white,
-              activeTrackColor: Colors.black,
+              activeColor:
+                  isDarkMode(context) ? Colors.grey.shade400 : Colors.white,
+              activeTrackColor:
+                  isDarkMode(context) ? Colors.teal.shade400 : Colors.black,
               value: isPrivate,
               onChanged: (value) => togglePrivate(),
             ),

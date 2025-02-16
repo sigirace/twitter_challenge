@@ -74,7 +74,6 @@ class _PostScreenState extends State<PostScreen> {
       height: size.height * 0.8,
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(Sizes.size20),
           topRight: Radius.circular(Sizes.size20),
