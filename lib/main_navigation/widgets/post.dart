@@ -45,8 +45,8 @@ class Post extends StatelessWidget {
                           borderRadius: Sizes.size30,
                         ),
                         Positioned(
-                          right: -2,
-                          bottom: -2,
+                          right: 0,
+                          bottom: 0,
                           child: Container(
                             width: Sizes.size24,
                             height: Sizes.size24,

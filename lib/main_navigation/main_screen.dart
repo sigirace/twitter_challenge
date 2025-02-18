@@ -7,6 +7,9 @@ import '../constants/fontsize.dart';
 import '../data/post_data.dart';
 
 class MainScreen extends StatefulWidget {
+  static const routeName = 'main';
+  static const routeURL = '/';
+
   const MainScreen({
     super.key,
   });
