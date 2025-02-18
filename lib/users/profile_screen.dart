@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_challenge/data/thread_data.dart';
 import 'package:twitter_challenge/main_navigation/widgets/dynamic_profile.dart';
 import 'package:twitter_challenge/main_navigation/widgets/post.dart';
@@ -12,6 +13,9 @@ import '../constants/sizes.dart';
 import '../data/reply_data.dart';
 
 class ProfileScreen extends StatelessWidget {
+  static const routeName = 'profile';
+  static const routeURL = '/profile';
+
   const ProfileScreen({super.key});
 
   @override
@@ -40,12 +44,7 @@ class ProfileScreen extends StatelessWidget {
                       horizontal: Sizes.size16,
                     ),
                     child: GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SettingScreen(),
-                        ),
-                      ),
+                      onTap: () => context.push(SettingScreen.routeURL),
                       child: const FaIcon(
                         FontAwesomeIcons.ellipsis,
                         size: Sizes.size24,

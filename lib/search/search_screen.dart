@@ -8,6 +8,9 @@ import '../data/search_data.dart';
 import '../widgets/custom_divider.dart';
 
 class SearchScreen extends StatelessWidget {
+  static const routeName = 'search';
+  static const routeURL = '/search';
+
   const SearchScreen({super.key});
 
   @override

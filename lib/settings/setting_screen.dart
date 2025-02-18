@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_challenge/settings/privacy_screen.dart';
 
 import '../constants/fontsize.dart';
@@ -8,6 +9,9 @@ import '../constants/gaps.dart';
 import '../constants/sizes.dart';
 
 class SettingScreen extends StatelessWidget {
+  static const routeName = 'setting';
+  static const routeURL = '/setting';
+
   const SettingScreen({super.key});
 
   @override
@@ -17,7 +21,7 @@ class SettingScreen extends StatelessWidget {
         title: const Text('Settings'),
         leadingWidth: Sizes.size100,
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () => context.pop(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -59,12 +63,7 @@ class SettingScreen extends StatelessWidget {
               size: Sizes.size20,
             ),
             title: const Text('Privacy'),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const PrivacyScreen(),
-              ),
-            ),
+            onTap: () => context.pushNamed(PrivacyScreen.routeName),
           ),
           const ListTile(
             leading: FaIcon(

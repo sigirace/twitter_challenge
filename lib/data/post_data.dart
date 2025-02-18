@@ -4,27 +4,6 @@ const String baseImagePath = 'assets/images/user';
 
 final List<PostData> postData = [
   PostData(
-    postId: '1',
-    userImagePath: '$baseImagePath/nomard.jpg',
-    userName: 'Nomard Coder',
-    postContent:
-        '늦게나마 펼처보는 지난 연말모임 현장....!!\n덕분에 훈훈했어요....🥰\n우리 또 자주 만나용 😚\n찐 개발자 커뮤니티는 #노마드코더 라능 😌\n.\n#개발자모임\n#커뮤니티 #커뮤니티의힘\n#여러분감사합니다❤️',
-    replyCount: 100,
-    likeCount: 100,
-    imagePaths: [
-      'assets/images/post/nomard_post_2_1.jpg',
-      'assets/images/post/nomard_post_2_2.jpg',
-      'assets/images/post/nomard_post_2_3.jpg',
-      'assets/images/post/nomard_post_2_4.jpg',
-    ],
-    likeUserImagePaths: [
-      '$baseImagePath/barchart.jpg',
-      '$baseImagePath/lakers.jpg',
-      '$baseImagePath/no_user.jpg',
-    ],
-    postType: PostType.image,
-  ),
-  PostData(
     postId: '2',
     userImagePath: '$baseImagePath/barchart.jpg',
     userName: 'barchart',

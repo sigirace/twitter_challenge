@@ -7,6 +7,9 @@ import '../constants/sizes.dart';
 import '../data/activity_data.dart';
 
 class ActivityScreen extends StatefulWidget {
+  static const routeName = 'activity';
+  static const routeURL = '/activity';
+
   const ActivityScreen({super.key});
 
   @override

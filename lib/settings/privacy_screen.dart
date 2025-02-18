@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_challenge/utils/mode.dart';
 
 import '../constants/fontsize.dart';
@@ -7,6 +8,9 @@ import '../constants/gaps.dart';
 import '../constants/sizes.dart';
 
 class PrivacyScreen extends StatefulWidget {
+  static const routeName = 'privacy';
+  static const routeURL = 'privacy';
+
   const PrivacyScreen({super.key});
 
   @override
@@ -29,7 +33,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
         title: const Text('Privacy'),
         leadingWidth: Sizes.size100,
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () => context.pop(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

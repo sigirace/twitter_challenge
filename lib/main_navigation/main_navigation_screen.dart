@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter_challenge/activity/activity_screen.dart';
 import 'package:twitter_challenge/main_navigation/main_screen.dart';
 import 'package:twitter_challenge/main_navigation/post_screen.dart';
@@ -11,7 +12,9 @@ import 'package:twitter_challenge/utils/mode.dart';
 import '../constants/sizes.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  final Widget child;
+
+  const MainNavigationScreen({super.key, required this.child});
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
@@ -25,6 +28,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     setState(() {
       _selectedIndex = index;
     });
+
+    switch (index) {
+      case 0:
+        context.go(MainScreen.routeURL);
+        break;
+      case 1:
+        context.go(SearchScreen.routeURL);
+        break;
+      case 3:
+        context.go(ActivityScreen.routeURL);
+        break;
+      case 4:
+        context.go(ProfileScreen.routeURL);
+        break;
+    }
   }
 
   void _onPostTap() async {
@@ -44,7 +62,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(isDarkMode(context));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: _isPostScreenOpen
