@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:twitter_challenge/data/thread_data.dart';
 import 'package:twitter_challenge/main_navigation/widgets/dynamic_profile.dart';
 import 'package:twitter_challenge/main_navigation/widgets/post.dart';
-import 'package:twitter_challenge/settings/setting_screen.dart';
+import 'package:twitter_challenge/settings/views/setting_screen.dart';
 import 'package:twitter_challenge/users/widgets/persistent_tab_bar.dart';
 import 'package:twitter_challenge/utils/mode.dart';
 

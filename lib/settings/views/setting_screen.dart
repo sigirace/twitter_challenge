@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:twitter_challenge/settings/privacy_screen.dart';
+import 'package:twitter_challenge/settings/views/privacy_screen.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = 'setting';

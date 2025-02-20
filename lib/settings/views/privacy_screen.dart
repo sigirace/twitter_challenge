@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter_challenge/settings/view_models/settings_vm.dart';
 import 'package:twitter_challenge/utils/mode.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
 class PrivacyScreen extends StatefulWidget {
   static const routeName = 'privacy';
@@ -57,17 +59,21 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
         children: [
           ListTile(
             leading: const FaIcon(
-              FontAwesomeIcons.lock,
+              FontAwesomeIcons.moon,
               size: Sizes.size20,
             ),
-            title: const Text('Private profile'),
+            title: const Text('Dark mode'),
             trailing: Switch(
-              activeColor:
-                  isDarkMode(context) ? Colors.grey.shade400 : Colors.white,
+              activeColor: context.watch<SettingsViewModel>().model.isDarkMode
+                  ? Colors.grey.shade400
+                  : Colors.white,
               activeTrackColor:
-                  isDarkMode(context) ? Colors.teal.shade400 : Colors.black,
-              value: isPrivate,
-              onChanged: (value) => togglePrivate(),
+                  context.watch<SettingsViewModel>().model.isDarkMode
+                      ? Colors.teal.shade400
+                      : Colors.black,
+              value: context.watch<SettingsViewModel>().model.isDarkMode,
+              onChanged: (value) =>
+                  context.read<SettingsViewModel>().toggleDarkMode(),
             ),
           ),
           ListTile(

@@ -4,8 +4,8 @@ import 'package:twitter_challenge/activity/activity_screen.dart';
 import 'package:twitter_challenge/main_navigation/main_navigation_screen.dart';
 import 'package:twitter_challenge/main_navigation/main_screen.dart';
 import 'package:twitter_challenge/search/search_screen.dart';
-import 'package:twitter_challenge/settings/privacy_screen.dart';
-import 'package:twitter_challenge/settings/setting_screen.dart';
+import 'package:twitter_challenge/settings/views/privacy_screen.dart';
+import 'package:twitter_challenge/settings/views/setting_screen.dart';
 import 'package:twitter_challenge/users/profile_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

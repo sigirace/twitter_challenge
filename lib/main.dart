@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:twitter_challenge/main_navigation/main_navigation_screen.dart';
 import 'package:twitter_challenge/router.dart';
+import 'package:twitter_challenge/settings/repos/settings_repo.dart';
+import 'package:twitter_challenge/settings/view_models/settings_vm.dart';
 
 import 'constants/fontsize.dart';
 import 'constants/sizes.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final preference = await SharedPreferences.getInstance();
+  final settingsRepository = SettingsRepository(preference);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SettingsViewModel(settingsRepository),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +39,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           routerConfig: router,
           title: 'Twitter Challenge',
-          themeMode: ThemeMode.system,
+          themeMode: context.watch<SettingsViewModel>().model.isDarkMode
+              ? ThemeMode.dark
+              : ThemeMode.light,
           theme: ThemeData(
             brightness: Brightness.light,
             scaffoldBackgroundColor: Colors.white,
