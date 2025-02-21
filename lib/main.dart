@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:riverpod/src/notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:twitter_challenge/main_navigation/main_navigation_screen.dart';
 import 'package:twitter_challenge/router.dart';
+import 'package:twitter_challenge/settings/models/settings_model.dart';
 import 'package:twitter_challenge/settings/repos/settings_repo.dart';
 import 'package:twitter_challenge/settings/view_models/settings_vm.dart';
 
@@ -13,13 +16,13 @@ import 'constants/sizes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final preference = await SharedPreferences.getInstance();
-  final settingsRepository = SettingsRepository(preference);
+  final repository = SettingsRepository(preference);
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => SettingsViewModel(settingsRepository),
+    ProviderScope(
+      overrides: [
+        settingsViewModelProvider.overrideWith(
+          () => SettingsViewModel(repository),
         ),
       ],
       child: const MyApp(),
@@ -27,19 +30,19 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, child) {
         return MaterialApp.router(
           routerConfig: router,
           title: 'Twitter Challenge',
-          themeMode: context.watch<SettingsViewModel>().model.isDarkMode
+          themeMode: ref.watch(settingsViewModelProvider).isDarkMode
               ? ThemeMode.dark
               : ThemeMode.light,
           theme: ThemeData(

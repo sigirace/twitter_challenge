@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -9,27 +10,14 @@ import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 
-class PrivacyScreen extends StatefulWidget {
+class PrivacyScreen extends ConsumerWidget {
   static const routeName = 'privacy';
   static const routeURL = 'privacy';
 
   const PrivacyScreen({super.key});
 
   @override
-  State<PrivacyScreen> createState() => _PrivacyScreenState();
-}
-
-class _PrivacyScreenState extends State<PrivacyScreen> {
-  bool isPrivate = true;
-
-  void togglePrivate() {
-    setState(() {
-      isPrivate = !isPrivate;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Privacy'),
@@ -64,16 +52,16 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             ),
             title: const Text('Dark mode'),
             trailing: Switch(
-              activeColor: context.watch<SettingsViewModel>().model.isDarkMode
+              activeColor: ref.watch(settingsViewModelProvider).isDarkMode
                   ? Colors.grey.shade400
                   : Colors.white,
-              activeTrackColor:
-                  context.watch<SettingsViewModel>().model.isDarkMode
-                      ? Colors.teal.shade400
-                      : Colors.black,
-              value: context.watch<SettingsViewModel>().model.isDarkMode,
-              onChanged: (value) =>
-                  context.read<SettingsViewModel>().toggleDarkMode(),
+              activeTrackColor: ref.watch(settingsViewModelProvider).isDarkMode
+                  ? Colors.teal.shade400
+                  : Colors.black,
+              value: ref.watch(settingsViewModelProvider).isDarkMode,
+              onChanged: (value) {
+                ref.read(settingsViewModelProvider.notifier).setDarkMode(value);
+              },
             ),
           ),
           ListTile(
