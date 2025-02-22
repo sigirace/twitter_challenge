@@ -1,0 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:twitter_challenge/authentication/models/user.dart';
+
+class AuthenticationRepository {
+  final FirebaseAuth _firebasAuth = FirebaseAuth.instance;
+
+  bool get isLoggedIn => _firebasAuth.currentUser != null;
+  User? get user => _firebasAuth.currentUser;
+
+  Future<void> signUp(UserData userData) async {
+    await _firebasAuth.createUserWithEmailAndPassword(
+      email: userData.email!,
+      password: userData.password!,
+    );
+  }
+
+  Future<void> signIn(String email, String password) async {
+    await _firebasAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  Future<void> signOut() async {
+    await _firebasAuth.signOut();
+  }
+
+  Stream<User?> authStateChanges() => _firebasAuth.authStateChanges();
+}
+
+final authRepo = Provider((ref) => AuthenticationRepository());
+
+final authState = StreamProvider((ref) {
+  final repo = ref.watch(authRepo);
+  return repo.authStateChanges();
+});

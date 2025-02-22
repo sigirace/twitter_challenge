@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/authentication/signup_form_screen.dart';
-import 'package:twitter_challenge/authentication/widgets/auth_button.dart';
+import 'package:go_router/go_router.dart';
+import 'package:twitter_challenge/authentication/views/login_screen.dart';
+import 'package:twitter_challenge/authentication/views/signup_form_screen.dart';
+import 'package:twitter_challenge/authentication/views/widgets/auth_button.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
 class SignupScreen extends StatelessWidget {
+  static const routeURL = "/";
+  static const routeName = "signup";
+
   const SignupScreen({super.key});
 
   @override
@@ -143,23 +148,27 @@ class SignupScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Have an account already? ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: FontSize.fs16,
+                  GestureDetector(
+                    onTap: () => context.go(LoginScreen.routeURL),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Have an account already? ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: FontSize.fs16,
+                            ),
                           ),
-                        ),
-                        TextSpan(
+                          TextSpan(
                             text: "Log in",
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: FontSize.fs16,
-                            ),),
-                      ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

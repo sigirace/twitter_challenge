@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:twitter_challenge/settings/view_models/settings_vm.dart';
-import 'package:twitter_challenge/utils/mode.dart';
 
 import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';

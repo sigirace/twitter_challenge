@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/interests/twitter_experience_screen.dart';
+import 'package:twitter_challenge/authentication/view_models/singup_view_model.dart';
+import 'package:twitter_challenge/interests/views/twitter_experience_screen.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
-class PasswordScreen extends StatefulWidget {
+class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({super.key});
 
   @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
+  ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
+class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   String _password = "";
@@ -47,11 +49,15 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   void _onNext() {
     if (_isPasswordValid()) {
-      Navigator.pushAndRemoveUntil(
+      final userData = ref.read(signUpForm);
+      ref.read(signUpForm.notifier).state =
+          userData.copyWith(password: _password);
+      ref.read(signUpProvider.notifier).signUp();
+      Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const TwitterExperienceScreen(),),
-        (route) => false,
+          builder: (context) => const TwitterExperienceScreen(),
+        ),
       );
     }
   }

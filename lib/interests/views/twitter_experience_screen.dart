@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/interests/experience_screen.dart';
-import 'package:twitter_challenge/interests/widgets/twitter_exprience_widget.dart';
+import 'package:twitter_challenge/interests/views/experience_screen.dart';
+import 'package:twitter_challenge/interests/views/widgets/twitter_exprience_widget.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
-import '../data/twitter_expereince.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
+import '../../data/twitter_expereince.dart';
 
 class TwitterExperienceScreen extends StatefulWidget {
   const TwitterExperienceScreen({super.key});

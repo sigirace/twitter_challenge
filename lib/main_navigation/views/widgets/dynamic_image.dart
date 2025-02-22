@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../constants/sizes.dart';
+import '../../../constants/sizes.dart';
 
 class DynamicImage extends StatelessWidget {
   const DynamicImage({

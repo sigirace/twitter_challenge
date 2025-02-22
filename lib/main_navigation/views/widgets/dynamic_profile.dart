@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_challenge/main_navigation/widgets/profile.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/profile.dart';
 
-import '../../constants/sizes.dart';
+import '../../../constants/sizes.dart';
 
 class DynamicProfile extends StatelessWidget {
   const DynamicProfile({

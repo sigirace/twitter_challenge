@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../constants/fontsize.dart';
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
-import '../../data/report_reason.dart';
+import '../../../constants/fontsize.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
+import '../../../data/report_reason.dart';
 
 class Report extends StatelessWidget {
   const Report({super.key});

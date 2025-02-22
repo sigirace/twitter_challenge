@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_challenge/main_navigation/widgets/report.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/report.dart';
 
-import '../../constants/fontsize.dart';
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
+import '../../../constants/fontsize.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
 
 class EllipsisTab extends StatefulWidget {
   const EllipsisTab({super.key});

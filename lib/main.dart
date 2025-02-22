@@ -1,12 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:riverpod/src/notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:twitter_challenge/main_navigation/main_navigation_screen.dart';
+import 'package:twitter_challenge/firebase_options.dart';
 import 'package:twitter_challenge/router.dart';
-import 'package:twitter_challenge/settings/models/settings_model.dart';
 import 'package:twitter_challenge/settings/repos/settings_repo.dart';
 import 'package:twitter_challenge/settings/view_models/settings_vm.dart';
 
@@ -15,6 +13,7 @@ import 'constants/sizes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final preference = await SharedPreferences.getInstance();
   final repository = SettingsRepository(preference);
 
@@ -40,7 +39,7 @@ class MyApp extends ConsumerWidget {
       designSize: const Size(360, 690),
       builder: (context, child) {
         return MaterialApp.router(
-          routerConfig: router,
+          routerConfig: ref.watch(routerProvider),
           title: 'Twitter Challenge',
           themeMode: ref.watch(settingsViewModelProvider).isDarkMode
               ? ThemeMode.dark

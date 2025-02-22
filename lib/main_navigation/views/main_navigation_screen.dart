@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:twitter_challenge/activity/activity_screen.dart';
-import 'package:twitter_challenge/main_navigation/main_screen.dart';
-import 'package:twitter_challenge/main_navigation/post_screen.dart';
-import 'package:twitter_challenge/main_navigation/widgets/nav_tab.dart';
+import 'package:twitter_challenge/main_navigation/views/main_screen.dart';
+import 'package:twitter_challenge/main_navigation/views/post_screen.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/nav_tab.dart';
 import 'package:twitter_challenge/users/profile_screen.dart';
 import 'package:twitter_challenge/search/search_screen.dart';
 import 'package:twitter_challenge/utils/mode.dart';
 
-import '../constants/sizes.dart';
+import '../../constants/sizes.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   final Widget child;

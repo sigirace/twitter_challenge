@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/constants/sizes.dart';
-import 'package:twitter_challenge/main_navigation/widgets/dynamic_image.dart';
-import 'package:twitter_challenge/main_navigation/widgets/dynamic_profile.dart';
-import 'package:twitter_challenge/main_navigation/widgets/inner_post.dart';
-import 'package:twitter_challenge/main_navigation/widgets/profile.dart';
-import '../../constants/fontsize.dart';
-import '../../constants/gaps.dart';
-import '../../schemas/post_schema.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/dynamic_image.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/dynamic_profile.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/inner_post.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/profile.dart';
+import '../../../constants/fontsize.dart';
+import '../../../constants/gaps.dart';
+import '../../../schemas/post_schema.dart';
 
 class Post extends StatelessWidget {
   const Post({

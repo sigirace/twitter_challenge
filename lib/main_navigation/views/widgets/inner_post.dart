@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_challenge/main_navigation/widgets/dynamic_image.dart';
+import 'package:twitter_challenge/main_navigation/views/widgets/dynamic_image.dart';
 
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
-import '../../schemas/post_schema.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
+import '../../../schemas/post_schema.dart';
 
 class InnerPost extends StatelessWidget {
   final InnerPostData innerPostData;

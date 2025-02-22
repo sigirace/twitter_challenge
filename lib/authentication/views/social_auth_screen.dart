@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/authentication/password_screen.dart';
+import 'package:twitter_challenge/authentication/views/password_screen.dart';
+import 'package:twitter_challenge/authentication/view_models/singup_view_model.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
-class SocialAuthScreen extends StatefulWidget {
-  final Map<String, dynamic> userData;
-  const SocialAuthScreen({super.key, required this.userData});
+class SocialAuthScreen extends ConsumerStatefulWidget {
+  const SocialAuthScreen({
+    super.key,
+  });
 
   @override
-  State<SocialAuthScreen> createState() => _SocialAuthScreenState();
+  ConsumerState<SocialAuthScreen> createState() => _SocialAuthScreenState();
 }
 
-class _SocialAuthScreenState extends State<SocialAuthScreen> {
+class _SocialAuthScreenState extends ConsumerState<SocialAuthScreen> {
   final List<TextEditingController> _controllers =
       List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
@@ -50,12 +53,11 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
 
   void _onNext() {
     if (_isAllFieldsFilled) {
-      Navigator.pushAndRemoveUntil(
+      Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const PasswordScreen(),
         ),
-        (route) => false,
       );
     }
   }
@@ -101,7 +103,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                   ),
                   Gaps.v20,
                   Text(
-                    "Enter it below to verify\n${widget.userData["email"]}.",
+                    "Enter it below to verify\n${ref.read(signUpForm).email}.",
                     style: TextStyle(
                       fontSize: FontSize.fs16,
                     ),

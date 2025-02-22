@@ -1,21 +1,47 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:twitter_challenge/authentication/view_models/login_view_model.dart';
 import 'package:twitter_challenge/settings/views/privacy_screen.dart';
 
 import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends ConsumerWidget {
   static const routeName = 'setting';
   static const routeURL = '/setting';
 
   const SettingScreen({super.key});
 
+  void signOut(BuildContext context, WidgetRef ref) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: const Text("Are you sure?"),
+        content: const Text("Plx dont go"),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text("No"),
+          ),
+          CupertinoDialogAction(
+            onPressed: () {
+              ref.read(loginProvider.notifier).signOut();
+              context.go("/");
+            },
+            isDestructiveAction: true,
+            child: const Text("Yes"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -97,6 +123,7 @@ class SettingScreen extends StatelessWidget {
               ),
             ),
             trailing: const CupertinoActivityIndicator(),
+            onTap: () => signOut(context, ref),
           ),
         ],
       ),

@@ -1,24 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/authentication/social_auth_screen.dart';
+import 'package:twitter_challenge/authentication/views/social_auth_screen.dart';
+import 'package:twitter_challenge/authentication/view_models/singup_view_model.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
-class SignupConfirmScreen extends StatelessWidget {
-  final Map<String, dynamic> userData;
+class SignupConfirmScreen extends ConsumerWidget {
   const SignupConfirmScreen({
     super.key,
-    required this.userData,
   });
 
-  bool _validateUserData() {
-    if (userData["name"] == null ||
-        userData["email"] == null ||
-        userData["birthday"] == null ||
-        userData["isTracking"] != true) {
+  bool _validateUserData(WidgetRef ref) {
+    final userData = ref.read(signUpForm);
+    if (userData.name == null ||
+        userData.email == null ||
+        userData.birthday == null ||
+        userData.isTracking != true) {
       return false;
     }
     return true;
@@ -31,16 +32,16 @@ class SignupConfirmScreen extends StatelessWidget {
         return CupertinoAlertDialog(
           title: const Text("Congratulations!"),
           content: const Text(
-              "You have successfully completed the signup. You can now register your desired experiences after verifying your email.",),
+            "You have successfully completed the signup. You can now register your desired experiences after verifying your email.",
+          ),
           actions: [
             CupertinoDialogAction(
               child: const Text("Confirm"),
               onPressed: () {
-                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SocialAuthScreen(userData: userData),
+                    builder: (context) => const SocialAuthScreen(),
                   ),
                 );
               },
@@ -51,14 +52,14 @@ class SignupConfirmScreen extends StatelessWidget {
     );
   }
 
-  void _onSignUp(BuildContext context) {
-    if (_validateUserData()) {
+  void _onSignUp(BuildContext context, WidgetRef ref) {
+    if (_validateUserData(ref)) {
       _showCongratulationsDialog(context);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -103,18 +104,19 @@ class SignupConfirmScreen extends StatelessWidget {
                         // Name
                         TextFormField(
                           autocorrect: false,
-                          initialValue: userData["name"],
+                          initialValue: ref.read(signUpForm).name,
                           decoration: const InputDecoration(
-                              labelText: "Name",
-                              suffixIcon: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.circleCheck,
-                                    color: Colors.green,
-                                  ),
-                                ],
-                              ),),
+                            labelText: "Name",
+                            suffixIcon: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.circleCheck,
+                                  color: Colors.green,
+                                ),
+                              ],
+                            ),
+                          ),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: FontSize.fs16,
@@ -124,19 +126,20 @@ class SignupConfirmScreen extends StatelessWidget {
                         // Email
                         TextFormField(
                           autocorrect: false,
-                          initialValue: userData["email"],
+                          initialValue: ref.read(signUpForm).email,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
-                              labelText: "Email",
-                              suffixIcon: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.circleCheck,
-                                    color: Colors.green,
-                                  ),
-                                ],
-                              ),),
+                            labelText: "Email",
+                            suffixIcon: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.circleCheck,
+                                  color: Colors.green,
+                                ),
+                              ],
+                            ),
+                          ),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: FontSize.fs16,
@@ -146,18 +149,19 @@ class SignupConfirmScreen extends StatelessWidget {
 
                         TextFormField(
                           autocorrect: false,
-                          initialValue: userData["birthday"],
+                          initialValue: ref.read(signUpForm).birthday,
                           decoration: const InputDecoration(
-                              labelText: "Birthday",
-                              suffixIcon: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.circleCheck,
-                                    color: Colors.green,
-                                  ),
-                                ],
-                              ),),
+                            labelText: "Birthday",
+                            suffixIcon: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.circleCheck,
+                                  color: Colors.green,
+                                ),
+                              ],
+                            ),
+                          ),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: FontSize.fs16,
@@ -265,7 +269,7 @@ class SignupConfirmScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: GestureDetector(
-          onTap: () => _onSignUp(context),
+          onTap: () => _onSignUp(context, ref),
           child: Padding(
             padding: EdgeInsets.only(
               bottom: Height.h50,

@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/media/Image_picker_screen.dart';
 import 'package:twitter_challenge/media/widgets/post_image.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});

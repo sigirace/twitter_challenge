@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/interests/widgets/experience_widget.dart';
+import 'package:go_router/go_router.dart';
+import 'package:twitter_challenge/interests/views/widgets/experience_widget.dart';
+import 'package:twitter_challenge/main_navigation/views/main_screen.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
-import '../data/experience.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
+import '../../data/experience.dart';
 
 class ExperienceScreen extends StatefulWidget {
   const ExperienceScreen({super.key});
@@ -44,42 +45,7 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
   }
 
   void _onNext() {
-    showDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        title: Text(
-          "You have selected",
-          style: TextStyle(
-            fontSize: FontSize.fs22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: Column(
-          children: [
-            Gaps.v10,
-            Text(
-              "Music interests",
-              style: TextStyle(
-                fontSize: FontSize.fs14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            for (var musicExperience in _isSelectedMusicExperiences)
-              Text(musicExperience.values.join(", ")),
-            Gaps.v10,
-            Text(
-              "Entertainment interests",
-              style: TextStyle(
-                fontSize: FontSize.fs14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            for (var enterExperience in _isSelectedEnterExperiences)
-              Text(enterExperience.values.join(", ")),
-          ],
-        ),
-      ),
-    );
+    context.goNamed(MainScreen.routeName);
   }
 
   @override

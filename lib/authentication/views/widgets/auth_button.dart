@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
 
 class AuthButton extends StatelessWidget {
   final String text;
@@ -19,12 +19,14 @@ class AuthButton extends StatelessWidget {
   });
 
   void _onTap(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => nextWidget!,
-      ),
-    );
+    if (nextWidget != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => nextWidget!,
+        ),
+      );
+    }
   }
 
   @override

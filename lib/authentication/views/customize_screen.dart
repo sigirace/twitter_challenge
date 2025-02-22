@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/authentication/signup_confirm_screen.dart';
+import 'package:twitter_challenge/authentication/views/signup_confirm_screen.dart';
+import 'package:twitter_challenge/authentication/view_models/singup_view_model.dart';
 
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
-class CustomizeScreen extends StatefulWidget {
-  final Map<String, dynamic> userData;
+class CustomizeScreen extends ConsumerStatefulWidget {
   const CustomizeScreen({
     super.key,
-    required this.userData,
   });
 
   @override
-  State<CustomizeScreen> createState() => _CustomizeScreenState();
+  ConsumerState<CustomizeScreen> createState() => CustomizeScreenState();
 }
 
-class _CustomizeScreenState extends State<CustomizeScreen> {
+class CustomizeScreenState extends ConsumerState<CustomizeScreen> {
   bool _isSwitchOn = false;
 
   void _onNext() {
     if (_isSwitchOn) {
-      widget.userData["isTracking"] = true;
+      final userData = ref.read(signUpForm);
+      ref.read(signUpForm.notifier).state = userData.copyWith(
+        isTracking: true,
+      );
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SignupConfirmScreen(
-            userData: widget.userData,
-          ),
+          builder: (context) => const SignupConfirmScreen(),
         ),
       );
     }

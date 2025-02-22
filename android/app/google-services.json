@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1027352102596",
+    "project_id": "tiktok-sigi",
+    "storage_bucket": "tiktok-sigi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027352102596:android:7c8648a2062e4b0cd4eb91",
+        "android_client_info": {
+          "package_name": "com.example.twitter_challenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFUzmcfZ1x99tKblNEIIpKbLcKQP5uuCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

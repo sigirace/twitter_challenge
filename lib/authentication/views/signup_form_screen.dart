@@ -1,21 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_challenge/authentication/customize_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:twitter_challenge/authentication/views/customize_screen.dart';
+import 'package:twitter_challenge/authentication/models/user.dart';
+import 'package:twitter_challenge/authentication/view_models/singup_view_model.dart';
 import 'package:twitter_challenge/utils/date_utils.dart';
 import 'package:twitter_challenge/utils/validator.dart';
-import '../constants/fontsize.dart';
-import '../constants/gaps.dart';
-import '../constants/sizes.dart';
+import '../../constants/fontsize.dart';
+import '../../constants/gaps.dart';
+import '../../constants/sizes.dart';
 
-class SignupFormScreen extends StatefulWidget {
+class SignupFormScreen extends ConsumerStatefulWidget {
   const SignupFormScreen({super.key});
 
   @override
-  State<SignupFormScreen> createState() => _SignupFormScreenState();
+  ConsumerState<SignupFormScreen> createState() => _SignupFormScreenState();
 }
 
-class _SignupFormScreenState extends State<SignupFormScreen> {
+class _SignupFormScreenState extends ConsumerState<SignupFormScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isNameValid = false;
   final FocusNode _nameFocusNode = FocusNode();
@@ -28,7 +32,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
   final _birthdayController = TextEditingController();
   final FocusNode _birthdayFocusNode = FocusNode();
 
-  Map<String, dynamic> userData = {};
+  UserData userData = UserData();
 
   @override
   void initState() {
@@ -66,17 +70,15 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
+        ref.read(signUpForm.notifier).state = userData;
       }
     } else {
       return;
     }
-
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CustomizeScreen(
-          userData: userData,
-        ),
+        builder: (context) => const CustomizeScreen(),
       ),
     );
   }
@@ -89,7 +91,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
         appBar: AppBar(
           leadingWidth: Width.w72,
           leading: GestureDetector(
-            // onTap: () => Navigator.pop(context),
+            onTap: () => context.pop(),
             child: Center(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -172,7 +174,9 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                                     ),
                             },
                             onTap: () => _onTap(_nameFocusNode),
-                            onSaved: (value) => userData["name"] = value!,
+                            onSaved: (value) {
+                              userData = userData.copyWith(name: value);
+                            },
                           ),
                           Gaps.v10,
                           // Email
@@ -213,7 +217,9 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                                     ),
                             },
                             onTap: () => _onTap(_emailFocusNode),
-                            onSaved: (value) => userData["email"] = value!,
+                            onSaved: (value) {
+                              userData = userData.copyWith(email: value);
+                            },
                           ),
                           Gaps.v10,
 
@@ -241,7 +247,9 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                             ),
                             readOnly: true,
                             onTap: () => _onTap(_birthdayFocusNode),
-                            onSaved: (value) => userData["birthday"] = value!,
+                            onSaved: (value) {
+                              userData = userData.copyWith(birthday: value);
+                            },
                           ),
                           if (_birthdayFocusNode.hasFocus)
                             Column(

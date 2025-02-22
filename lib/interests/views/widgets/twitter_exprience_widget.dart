@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../constants/fontsize.dart';
-import '../../constants/sizes.dart';
+import '../../../constants/fontsize.dart';
+import '../../../constants/sizes.dart';
 
 class TwitterExperienceWidget extends StatefulWidget {
   const TwitterExperienceWidget({

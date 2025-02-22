@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/fontsize.dart';
-import '../../constants/sizes.dart';
+import '../../../constants/fontsize.dart';
+import '../../../constants/sizes.dart';
 
 class ExperienceWidget extends StatefulWidget {
   const ExperienceWidget({
