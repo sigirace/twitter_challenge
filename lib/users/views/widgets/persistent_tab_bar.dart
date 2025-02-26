@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_challenge/utils/mode.dart';
 
-import '../../constants/sizes.dart';
+import '../../../constants/sizes.dart';
 
 class PersistentTabBar extends SliverPersistentHeaderDelegate {
   @override

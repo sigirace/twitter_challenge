@@ -5,7 +5,7 @@ import 'package:twitter_challenge/activity/activity_screen.dart';
 import 'package:twitter_challenge/main_navigation/views/main_screen.dart';
 import 'package:twitter_challenge/main_navigation/views/post_screen.dart';
 import 'package:twitter_challenge/main_navigation/views/widgets/nav_tab.dart';
-import 'package:twitter_challenge/users/profile_screen.dart';
+import 'package:twitter_challenge/users/views/profile_screen.dart';
 import 'package:twitter_challenge/search/search_screen.dart';
 import 'package:twitter_challenge/utils/mode.dart';
 

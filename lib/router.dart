@@ -10,7 +10,7 @@ import 'package:twitter_challenge/main_navigation/views/main_screen.dart';
 import 'package:twitter_challenge/search/search_screen.dart';
 import 'package:twitter_challenge/settings/views/privacy_screen.dart';
 import 'package:twitter_challenge/settings/views/setting_screen.dart';
-import 'package:twitter_challenge/users/profile_screen.dart';
+import 'package:twitter_challenge/users/views/profile_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();

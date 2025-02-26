@@ -8,8 +8,8 @@ class AuthenticationRepository {
   bool get isLoggedIn => _firebasAuth.currentUser != null;
   User? get user => _firebasAuth.currentUser;
 
-  Future<void> signUp(UserData userData) async {
-    await _firebasAuth.createUserWithEmailAndPassword(
+  Future<UserCredential> signUp(UserData userData) async {
+    return await _firebasAuth.createUserWithEmailAndPassword(
       email: userData.email!,
       password: userData.password!,
     );

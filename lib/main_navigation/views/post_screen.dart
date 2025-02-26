@@ -1,24 +1,33 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_challenge/main_navigation/view_models/post_screen_view_model.dart';
+import 'package:twitter_challenge/main_navigation/view_models/post_view_model.dart';
 import 'package:twitter_challenge/media/Image_picker_screen.dart';
 import 'package:twitter_challenge/media/widgets/post_image.dart';
+import 'package:twitter_challenge/users/view_models/user_view_model.dart';
 
 import '../../constants/fontsize.dart';
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 
-class PostScreen extends StatefulWidget {
+class PostScreen extends ConsumerStatefulWidget {
   const PostScreen({super.key});
 
   @override
-  State<PostScreen> createState() => _PostScreenState();
+  ConsumerState<PostScreen> createState() => _PostScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _PostScreenState extends ConsumerState<PostScreen> {
   final FocusNode _focusNode = FocusNode();
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
+  bool isLoading = false;
   String? _selectedImagePath;
+  XFile? file;
 
   @override
   void initState() {
@@ -40,15 +49,15 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   Future<void> _onMediaPost() async {
-    final result = await Navigator.of(context).push(
+    file = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ImagePickerScreen(),
         fullscreenDialog: true,
       ),
     );
 
-    if (result != null && result is String) {
-      _selectedImagePath = result;
+    if (file != null) {
+      _selectedImagePath = file!.path;
       setState(() {});
     }
   }
@@ -65,6 +74,18 @@ class _PostScreenState extends State<PostScreen> {
     setState(() {
       _selectedImagePath = null;
     });
+  }
+
+  Future<void> _onPost() async {
+    setState(() {
+      isLoading = true;
+    });
+    await ref.read(postViewModel.notifier).uploadPost(
+          content: _textController.text,
+          image: file != null ? File(file!.path) : null,
+        );
+    await ref.read(postScreenViewModel.notifier).refresh();
+    Navigator.pop(context);
   }
 
   @override
@@ -102,93 +123,109 @@ class _PostScreenState extends State<PostScreen> {
           ),
           body: SingleChildScrollView(
             controller: _scrollController,
-            child: Column(
+            child: Stack(
               children: [
-                const Divider(
-                  color: Colors.grey,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
+                Column(
+                  children: [
+                    const Divider(
+                      color: Colors.grey,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IntrinsicHeight(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const CircleAvatar(
-                              radius: Sizes.size20,
-                              backgroundImage: AssetImage(
-                                "assets/images/user/lakers.jpg",
-                              ),
-                            ),
-                            Gaps.v10,
-                            Expanded(
-                              child: Container(
-                                width: Sizes.size2,
-                                color: Colors.grey.shade400,
-                              ),
-                            ),
-                            Gaps.v10,
-                            const FaIcon(
-                              FontAwesomeIcons.clipboard,
-                              size: Sizes.size20,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
-                        Gaps.h10,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "lakers",
-                                style: TextStyle(
-                                  fontSize: FontSize.fs13,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              TextField(
-                                controller: _textController,
-                                autocorrect: false,
-                                focusNode: _focusNode,
-                                maxLines: null,
-                                minLines: null,
-                                textInputAction: TextInputAction.newline,
-                                decoration: InputDecoration(
-                                  hintText: 'Start a thread...',
-                                  hintStyle: TextStyle(
-                                    fontSize: FontSize.fs13,
-                                    fontWeight: FontWeight.w300,
+                            Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: Sizes.size20,
+                                  backgroundImage: NetworkImage(
+                                    "https://firebasestorage.googleapis.com/v0/b/tiktok-sigi.firebasestorage.app/o/avatars%2F${ref.watch(userProvider).value?.uid}?alt=media&token=468a64af-7f46-46be-99ba-b01f9d06038b",
                                   ),
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
                                 ),
-                              ),
-                              if (_selectedImagePath != null)
-                                PostImage(
-                                  imagePath: _selectedImagePath!,
-                                  callback: _removeImage,
+                                Gaps.v10,
+                                Expanded(
+                                  child: Container(
+                                    width: Sizes.size2,
+                                    color: Colors.grey.shade400,
+                                  ),
                                 ),
-                              Gaps.v10,
-                              Gaps.v10,
-                              GestureDetector(
-                                onTap: _onMediaPost,
-                                child: const FaIcon(
-                                  FontAwesomeIcons.paperclip,
+                                Gaps.v10,
+                                const FaIcon(
+                                  FontAwesomeIcons.clipboard,
                                   size: Sizes.size20,
                                   color: Colors.grey,
                                 ),
+                              ],
+                            ),
+                            Gaps.h10,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ref.watch(userProvider).value?.name ?? "",
+                                    style: TextStyle(
+                                      fontSize: FontSize.fs13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  TextField(
+                                    controller: _textController,
+                                    autocorrect: false,
+                                    focusNode: _focusNode,
+                                    maxLines: null,
+                                    minLines: null,
+                                    textInputAction: TextInputAction.newline,
+                                    decoration: InputDecoration(
+                                      hintText: 'Start a thread...',
+                                      hintStyle: TextStyle(
+                                        fontSize: FontSize.fs13,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                    ),
+                                  ),
+                                  if (_selectedImagePath != null)
+                                    PostImage(
+                                      imagePath: _selectedImagePath!,
+                                      callback: _removeImage,
+                                    ),
+                                  Gaps.v10,
+                                  Gaps.v10,
+                                  GestureDetector(
+                                    onTap: _onMediaPost,
+                                    child: const FaIcon(
+                                      FontAwesomeIcons.paperclip,
+                                      size: Sizes.size20,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Gaps.v30,
+                                ],
                               ),
-                              Gaps.v30,
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
+                    ),
+                    Gaps.v45,
+                  ],
+                ),
+                if (isLoading)
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.black54,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                Gaps.v45,
               ],
             ),
           ),
@@ -209,7 +246,7 @@ class _PostScreenState extends State<PostScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: _onPost,
                   child: Text(
                     'Post',
                     style: TextStyle(

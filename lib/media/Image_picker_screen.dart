@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,18 +23,29 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
 
   final bool _isSelfieMode = false;
 
+  late final bool _noCamera = kDebugMode && Platform.isIOS;
+
   late CameraController _cameraController;
 
   @override
   void initState() {
     super.initState();
-    initPermissions();
+    if (!_noCamera) {
+      initPermissions();
+    } else {
+      setState(() {
+        _hasPermission = true;
+      });
+    }
+
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    _cameraController.dispose();
+    if (!_noCamera) {
+      _cameraController.dispose();
+    }
     super.dispose();
   }
 
@@ -54,6 +68,18 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
     setState(() {});
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (_noCamera) return;
+    if (!_hasPermission) return;
+    if (!_cameraController.value.isInitialized) return;
+    if (state == AppLifecycleState.inactive) {
+      _cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      initCamera();
+    }
+  }
+
   Future<void> _onPickImagePressed() async {
     final image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -61,7 +87,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
     if (image == null) return;
 
     if (!mounted) return;
-    Navigator.pop(context, image.path);
+    Navigator.pop(context, image);
   }
 
   Future<void> initPermissions() async {
@@ -92,7 +118,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
     return Scaffold(
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
-        child: !_hasPermission || !_cameraController.value.isInitialized
+        child: !_hasPermission
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -109,24 +135,17 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  CameraPreview(_cameraController),
-                  Positioned(
-                    top: Sizes.size20,
-                    right: Sizes.size20,
-                    child: Column(
-                      children: [
-                        IconButton(
-                          color: Colors.white,
-                          onPressed: () {},
-                          icon: const FaIcon(
-                            FontAwesomeIcons.xmark,
-                          ),
-                        ),
-                      ],
+                  if (!_noCamera && _cameraController.value.isInitialized)
+                    CameraPreview(_cameraController),
+                  const Positioned(
+                    top: Sizes.size40,
+                    left: Sizes.size20,
+                    child: CloseButton(
+                      color: Colors.black,
                     ),
                   ),
                   Positioned(
-                    bottom: Sizes.size10,
+                    bottom: Sizes.size40,
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       children: [
@@ -138,7 +157,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
                             children: [
                               FaIcon(
                                 FontAwesomeIcons.camera,
-                                color: Colors.white,
+                                color: Colors.black,
                                 size: Sizes.size50,
                               ),
                             ],
@@ -151,7 +170,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen>
                               onPressed: _onPickImagePressed,
                               icon: const FaIcon(
                                 FontAwesomeIcons.image,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
                           ),

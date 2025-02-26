@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter_challenge/constants/sizes.dart';
+import 'package:twitter_challenge/main_navigation/models/post_model.dart';
 import 'package:twitter_challenge/main_navigation/views/widgets/dynamic_image.dart';
 import 'package:twitter_challenge/main_navigation/views/widgets/dynamic_profile.dart';
 import 'package:twitter_challenge/main_navigation/views/widgets/inner_post.dart';
@@ -16,7 +17,7 @@ class Post extends StatelessWidget {
     required this.onEllipsisTap,
   });
 
-  final PostData postData;
+  final PostModel postData;
   final VoidCallback onEllipsisTap;
 
   @override
@@ -39,7 +40,10 @@ class Post extends StatelessWidget {
                     Stack(
                       children: [
                         Profile(
-                          userImagePath: postData.userImagePath,
+                          user: {
+                            "uid": postData.createUser,
+                            "hasAvatar": postData.hasAvatar,
+                          },
                           widthSize: Sizes.size60,
                           heightSize: Sizes.size60,
                           borderRadius: Sizes.size30,
@@ -87,7 +91,7 @@ class Post extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            postData.userName,
+                            postData.createUserName,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: FontSize.fs12,
@@ -116,18 +120,18 @@ class Post extends StatelessWidget {
                         ],
                       ),
                       Gaps.v5,
-                      Text(postData.postContent),
+                      Text(postData.content),
                       Gaps.v5,
-                      if (postData.postType == PostType.image &&
-                          postData.imagePaths != null)
+                      if (postData.type.name == "image" &&
+                          postData.imageUrls != null)
                         DynamicImage(
-                          imagePaths: postData.imagePaths!,
-                        )
-                      else if (postData.postType == PostType.innerPost &&
-                          postData.innerPostData != null)
-                        InnerPost(
-                          innerPostData: postData.innerPostData!,
+                          imagePaths: [postData.imageUrls!],
                         ),
+                      // else if (postData.type == PostType.innerPost &&
+                      //     postData.innerPostId != null)
+                      //   InnerPost(
+                      //     innerPostData: postData.innerPostId!,
+                      //   ),
                       Gaps.v10,
                       Row(
                         children: [
@@ -156,7 +160,7 @@ class Post extends StatelessWidget {
                           ),
                         ],
                       ),
-                      if (postData.replyData != null) Gaps.v10,
+                      if (postData.replyCount != 0) Gaps.v10,
                     ],
                   ),
                 ),
@@ -164,109 +168,121 @@ class Post extends StatelessWidget {
             ),
           ),
           Gaps.v5,
-          if (postData.replyData == null)
-            Row(
-              children: [
-                SizedBox(
-                  width: Sizes.size60,
-                  height: Sizes.size50,
-                  child: DynamicProfile(
-                    userImagePaths: postData.likeUserImagePaths,
-                  ),
-                ),
-                Gaps.h4,
-                Text('${postData.replyCount} replies'),
-                Gaps.h4,
-                const Text('•'),
-                Gaps.h4,
-                Text('${postData.likeCount} likes'),
-              ],
-            )
-          else
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: Sizes.size60,
-                  height: Sizes.size50,
-                  child: CircleAvatar(
-                    radius: Sizes.size10,
-                    backgroundImage:
-                        AssetImage(postData.replyData!.userImagePath),
-                  ),
-                ),
-                Gaps.h4,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            postData.replyData!.userName,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: FontSize.fs12,
-                            ),
+          // if (postData.likeCount != 0)
+          Row(
+            children: [
+              SizedBox(
+                width: Sizes.size60,
+                height: Sizes.size50,
+                child: postData.likeCount != 0
+                    ? DynamicProfile(
+                        userImagePaths: postData.likes!,
+                      )
+                    : const Center(
+                        child: SizedBox(
+                          width: Sizes.size30,
+                          height: Sizes.size30,
+                          child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage("assets/images/user/no_user.jpg"),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '2m',
-                                style: TextStyle(
-                                  fontSize: FontSize.fs12,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              Gaps.h10,
-                              GestureDetector(
-                                onTap: onEllipsisTap,
-                                child: FaIcon(
-                                  FontAwesomeIcons.ellipsis,
-                                  size: FontSize.fs12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
-                      Gaps.v5,
-                      Text(postData.replyData!.replyContent),
-                      Gaps.v10,
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.heart,
-                            color: Colors.grey.shade700,
-                            size: FontSize.fs16,
-                          ),
-                          Gaps.h20,
-                          FaIcon(
-                            FontAwesomeIcons.message,
-                            color: Colors.grey.shade700,
-                            size: FontSize.fs16,
-                          ),
-                          Gaps.h20,
-                          FaIcon(
-                            FontAwesomeIcons.share,
-                            color: Colors.grey.shade700,
-                            size: FontSize.fs16,
-                          ),
-                          Gaps.h20,
-                          FaIcon(
-                            FontAwesomeIcons.paperPlane,
-                            color: Colors.grey.shade700,
-                            size: FontSize.fs16,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+              Gaps.h4,
+              Text('${postData.replyCount} replies'),
+              Gaps.h4,
+              const Text('•'),
+              Gaps.h4,
+              Text('${postData.likeCount} likes'),
+            ],
+          ),
+          // else
+
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     SizedBox(
+          //       width: Sizes.size60,
+          //       height: Sizes.size50,
+          //       child: CircleAvatar(
+          //         radius: Sizes.size10,
+          //         backgroundImage:
+          //             AssetImage(postData.replies![0]["userImagePath"]),
+          //       ),
+          //     ),
+          //     Gaps.h4,
+          //     Expanded(
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Row(
+          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //             children: [
+          //               Text(
+          //                 postData.replyData!.userName,
+          //                 style: TextStyle(
+          //                   fontWeight: FontWeight.bold,
+          //                   fontSize: FontSize.fs12,
+          //                 ),
+          //               ),
+          //               Row(
+          //                 mainAxisSize: MainAxisSize.min,
+          //                 children: [
+          //                   Text(
+          //                     '2m',
+          //                     style: TextStyle(
+          //                       fontSize: FontSize.fs12,
+          //                       color: Colors.grey,
+          //                     ),
+          //                   ),
+          //                   Gaps.h10,
+          //                   GestureDetector(
+          //                     onTap: onEllipsisTap,
+          //                     child: FaIcon(
+          //                       FontAwesomeIcons.ellipsis,
+          //                       size: FontSize.fs12,
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ],
+          //           ),
+          //           Gaps.v5,
+          //           Text(postData.replies!),
+          //           Gaps.v10,
+          //           Row(
+          //             children: [
+          //               FaIcon(
+          //                 FontAwesomeIcons.heart,
+          //                 color: Colors.grey.shade700,
+          //                 size: FontSize.fs16,
+          //               ),
+          //               Gaps.h20,
+          //               FaIcon(
+          //                 FontAwesomeIcons.message,
+          //                 color: Colors.grey.shade700,
+          //                 size: FontSize.fs16,
+          //               ),
+          //               Gaps.h20,
+          //               FaIcon(
+          //                 FontAwesomeIcons.share,
+          //                 color: Colors.grey.shade700,
+          //                 size: FontSize.fs16,
+          //               ),
+          //               Gaps.h20,
+          //               FaIcon(
+          //                 FontAwesomeIcons.paperPlane,
+          //                 color: Colors.grey.shade700,
+          //                 size: FontSize.fs16,
+          //               ),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ],
+          // ),
           Gaps.v5,
           const Divider(
             color: Colors.grey,

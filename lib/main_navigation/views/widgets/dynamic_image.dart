@@ -10,8 +10,8 @@ class DynamicImage extends StatelessWidget {
 
   final List<String> imagePaths;
 
-  Future<Size> _getImageSize(String assetPath) async {
-    final Image image = Image.asset(assetPath);
+  Future<Size> _getImageSize(String path) async {
+    final Image image = Image.network(path);
     final Completer<Size> completer = Completer();
 
     image.image.resolve(const ImageConfiguration()).addListener(
@@ -67,7 +67,7 @@ class DynamicImage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                         Sizes.size12,
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         entry.value,
                         width: imageWidth,
                         height: imageHeight,

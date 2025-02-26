@@ -1,1 +1,47 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"tiktok-sigi","appId":"1:1027352102596:android:7c8648a2062e4b0cd4eb91","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"tiktok-sigi","appId":"1:1027352102596:ios:064d818cecd27d2ed4eb91","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"tiktok-sigi","configurations":{"android":"1:1027352102596:android:7c8648a2062e4b0cd4eb91","ios":"1:1027352102596:ios:064d818cecd27d2ed4eb91","web":"1:1027352102596:web:65068b19c34c6c59d4eb91"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "tiktok-sigi",
+          "appId": "1:1027352102596:android:7c8648a2062e4b0cd4eb91",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "tiktok-sigi",
+          "appId": "1:1027352102596:ios:064d818cecd27d2ed4eb91",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "tiktok-sigi",
+          "configurations": {
+            "android": "1:1027352102596:android:7c8648a2062e4b0cd4eb91",
+            "ios": "1:1027352102596:ios:064d818cecd27d2ed4eb91",
+            "web": "1:1027352102596:web:65068b19c34c6c59d4eb91"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "yarn --cwd \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}
