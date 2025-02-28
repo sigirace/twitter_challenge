@@ -62,6 +62,14 @@ class PostRepository {
     await _firestore.collection("posts").doc(post.postId).set(post.toJson());
   }
 
+  Future<List<Map<String, dynamic>>> searchPosts(String query) async {
+    final posts = await _firestore
+        .collection("posts")
+        .orderBy("content")
+        .startAt([query]).endAt(["$query\uf8ff"]).get();
+    return posts.docs.map((doc) => doc.data()).toList();
+  }
+
   // Future<List<PostModel>> getPostsByUser(String uid) async {
   //   final posts = await _firestore
   //       .collection("posts")
